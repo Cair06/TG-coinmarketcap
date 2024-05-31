@@ -3,6 +3,9 @@ import requests
 import psutil
 import logging
 from aiogram import Bot
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 
 TOKEN = os.environ["BOT_TOKEN"]
 LOG_CHAT_ID = os.environ["LOG_CHAT_ID"]
