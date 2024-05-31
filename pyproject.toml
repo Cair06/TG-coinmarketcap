@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "testovoe-task2"
+version = "0.1.0"
+description = ""
+authors = ["Chanov Sergey <s.c.chanov@mail.ru>"]
+readme = "README.md"
+packages = [{include = "testovoe_task2"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.32.3"
+aiogram = "^3.6.0"
+aiosqlite = "^0.20.0"
+python-dotenv = "^1.0.1"
+aiocron = "^1.8"
+psutil = "^5.9.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
