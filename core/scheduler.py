@@ -4,9 +4,9 @@ from database import check_thresholds
 from utils import send_system_stats
 
 
-async def scheduled_check_thresholds():
+async def scheduled_check_thresholds(bot):
     while True:
-        await check_thresholds()
+        await check_thresholds(bot)
         await asyncio.sleep(120)  # Ждать 2 минуты
 
 

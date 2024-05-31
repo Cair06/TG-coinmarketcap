@@ -35,7 +35,23 @@ try:
     response.raise_for_status()
     # Обработка данных
     data = response.json()
-    print(json.dumps(data, indent=4))
+
+    # Печать данных в удобном формате
+    # print(json.dumps(data, indent=4))
+
+    # Условие для биткоина
+    for crypto in data["data"]:
+        if crypto["symbol"] == "BTC":
+            price = crypto["quote"]["USD"]["price"]
+            if price > 50000:
+                print(f"Цена биткоина ({crypto['name']}) выше 50000 USD: {price}")
+            elif price < 10000:
+                print(f"Цена биткоина ({crypto['name']}) ниже 10000 USD: {price}")
+            else:
+                print(
+                    f"Цена биткоина ({crypto['name']}) в диапазоне 10000-50000 USD: {price}"
+                )
+
 except requests.exceptions.HTTPError as http_err:
     print(f"HTTP error occurred: {http_err}")
 except requests.exceptions.ConnectionError as conn_err:

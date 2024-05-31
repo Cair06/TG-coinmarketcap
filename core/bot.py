@@ -9,8 +9,9 @@ from handlers import register_handlers
 from scheduler import scheduled_check_thresholds, scheduled_send_system_stats
 from database import init_db
 
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
+
 # Загружаем переменные окружения из .env файла
-load_dotenv()
 
 # Получаем токены и ключи из переменных окружения
 TOKEN = os.environ["BOT_TOKEN"]
@@ -29,7 +30,7 @@ async def main() -> None:
     register_handlers(dp)
 
     # Запуск планировщика задач
-    asyncio.create_task(scheduled_check_thresholds())
+    asyncio.create_task(scheduled_check_thresholds(bot))
     asyncio.create_task(scheduled_send_system_stats())
 
     # dp.start_polling запустит бота и будет обрабатывать сообщения

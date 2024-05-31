@@ -18,7 +18,7 @@ async def set_threshold(message: Message):
         if len(parts) < 2:
             raise ValueError
 
-        symbol = parts[1].upper()
+        slug = parts[1].lower()
         min_value = None
         max_value = None
 
@@ -30,14 +30,14 @@ async def set_threshold(message: Message):
 
         async with aiosqlite.connect("thresholds.db") as db:
             await db.execute(
-                "INSERT OR REPLACE INTO thresholds (chat_id, symbol, min_value, max_value) VALUES (?, ?, ?, ?)",
-                (message.chat.id, symbol, min_value, max_value),
+                "INSERT OR REPLACE INTO thresholds (chat_id, slug, min_value, max_value) VALUES (?, ?, ?, ?)",
+                (message.chat.id, slug, min_value, max_value),
             )
             await db.commit()
         await message.answer(
-            f"Thresholds set for {html.escape(symbol)}: min {min_value if min_value is not None else 'None'} USD, max {max_value if max_value is not None else 'None'} USD"
+            f"Thresholds set for {html.escape(slug)}: min {min_value if min_value is not None else 'None'} USD, max {max_value if max_value is not None else 'None'} USD"
         )
-        logging.info(f"Thresholds set for {symbol}: min {min_value}, max {max_value}")
+        logging.info(f"Thresholds set for {slug}: min {min_value}, max {max_value}")
     except ValueError:
         await message.answer("Usage: /set <SYMBOL> [min:<MIN_VALUE>] [max:<MAX_VALUE>]")
 
