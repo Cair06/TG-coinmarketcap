@@ -1,7 +1,7 @@
 import html
 import aiosqlite
 import logging
-from utils import send_log_to_chat, get_crypto_data
+from utils import get_crypto_data
 
 
 async def init_db():

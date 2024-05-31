@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Укажите ваш API ключ здесь
 api_key = os.environ["CMC_API_KEY"]
 
 # URL для запроса данных из CoinMarketCap API
@@ -29,15 +28,9 @@ session = requests.Session()
 session.headers.update(headers)
 
 try:
-    # Выполнение запроса
     response = session.get(url, params=parameters)
-    # Проверка на успешный ответ
     response.raise_for_status()
-    # Обработка данных
     data = response.json()
-
-    # Печать данных в удобном формате
-    # print(json.dumps(data, indent=4))
 
     # Условие для биткоина
     for crypto in data["data"]:

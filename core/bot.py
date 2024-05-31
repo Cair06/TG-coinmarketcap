@@ -11,12 +11,9 @@ from database import init_db
 
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 
-# Загружаем переменные окружения из .env файла
 
-# Получаем токены и ключи из переменных окружения
 TOKEN = os.environ["BOT_TOKEN"]
 
-# Создаем экземпляр Dispatcher
 dp = Dispatcher()
 bot = Bot(token=TOKEN, parse_mode=ParseMode.HTML)
 
@@ -33,7 +30,6 @@ async def main() -> None:
     asyncio.create_task(scheduled_check_thresholds(bot))
     asyncio.create_task(scheduled_send_system_stats())
 
-    # dp.start_polling запустит бота и будет обрабатывать сообщения
     await dp.start_polling(bot)
 
 
