@@ -6,7 +6,7 @@ from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.enums import ParseMode
 from dotenv import load_dotenv
 from handlers import register_handlers
-from scheduler import scheduled_check_thresholds, scheduled_send_system_stats
+from scheduler import scheduled_check_thresholds
 from database import init_db
 
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
@@ -28,7 +28,6 @@ async def main() -> None:
 
     # Запуск планировщика задач
     asyncio.create_task(scheduled_check_thresholds(bot))
-    asyncio.create_task(scheduled_send_system_stats())
 
     await dp.start_polling(bot)
 

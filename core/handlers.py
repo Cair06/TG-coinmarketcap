@@ -4,6 +4,13 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 import aiosqlite
 import logging
+from utils import get_system_stats
+
+
+async def command_stats_handler(message: Message) -> None:
+    stats = get_system_stats()
+    await message.answer(stats)
+    logging.info("System stats sent to chat")
 
 
 async def command_start_handler(message: Message) -> None:
@@ -45,3 +52,4 @@ async def set_threshold(message: Message):
 def register_handlers(dp: Dispatcher):
     dp.message.register(command_start_handler, CommandStart())
     dp.message.register(set_threshold, Command(commands=["set"]))
+    dp.message.register(command_stats_handler, Command(commands=["stats"]))

@@ -4,6 +4,8 @@ import psutil
 import logging
 from aiogram import Bot
 from dotenv import load_dotenv
+import psutil
+
 
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 
@@ -29,11 +31,6 @@ def get_system_stats():
     disk_info = psutil.disk_usage("/")
 
     return f"CPU Usage: {cpu_usage}%\nMemory: {memory_info.percent}% used\nDisk: {disk_info.percent}% used"
-
-
-async def send_system_stats():
-    stats = get_system_stats()
-    await send_log_to_chat(stats)
 
 
 async def get_crypto_data():
